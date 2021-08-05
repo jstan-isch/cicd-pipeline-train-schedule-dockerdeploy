@@ -14,9 +14,9 @@ pipeline {
                 branch 'master' && getGitChanges() == true
             }
             steps {
-                scripts {
+                script {
                     app = docker.build("rabbai/trainSchedule")
-                    app.inside() {
+                    app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
                 }
