@@ -11,7 +11,7 @@ pipeline {
 
         stage('Build-Docker-Image') {
             when {
-                branch 'master'
+                branch 'master' && getGitChanges() == true
             }
             steps {
                 scripts {
