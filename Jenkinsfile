@@ -43,7 +43,7 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
-                        sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker pull rabbai/train-schedule\""
+                        sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker pull rabbai/train-schedule:${env.BUILD_NUMBER}\""
                         try {
                             sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker stop rabbai/train-schedule\""
                             sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker rm rabbai/train-schedule\""
