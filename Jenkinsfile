@@ -41,7 +41,7 @@ pipeline {
             steps {
                 input 'Deploy to production'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME'), usernamePassword: 'USERPASS']) {
+                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', usernamePassword: 'USERPASS']) {
                     script {
                         sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker pull rabbai/train-schedule\""
                         try {
