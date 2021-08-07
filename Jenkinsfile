@@ -48,9 +48,9 @@ pipeline {
                             sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker stop rabbai/train-schedule\""
                             sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker rm rabbai/train-schedule\""
                         } catch (err){
-                            echo 'caught error: $err'
+                            echo: 'caught error: $err'
                         }
-                        "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker run -d rabbai/train-schedule:${env.BUILD_NUMBER} -p 8080:8080 --name train-schedule --restart always\""
+                        sh "sshpass -p ${USERPASS} -v ssh -o StrictHostKeyChecking=no ${USERNAME}@${prod_ip} \"docker run --restart always -d rabbai/train-schedule:${env.BUILD_NUMBER} -p 8080:8080 --name train-schedule\""
                     }
                 }
                 
