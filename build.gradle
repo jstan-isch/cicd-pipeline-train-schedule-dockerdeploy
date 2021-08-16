@@ -24,6 +24,7 @@ task zip(type: Zip) {
 		include "views/**"
 	}
 	destinationDir(file("dist"))
+	# changed the artifact output file
 	baseName "train-Schedule"
 }
 
